@@ -1,6 +1,28 @@
 <?php
+//error_reporting(0);
+require_once('usuario_autenticado.php');
+if(isset($_SESSION['id_chamado'])){ 
+$arquivo = fopen('chamados.txt', 'r+');
+$chamados = [];
 
- require_once('usuario_autenticado.php');
+while(!feof($arquivo)){
+    $dados = fgets($arquivo);
+    $chamados[] = $dados;
+    
+}
+$chamados_registrados;
+foreach($chamados as $itens){ 
+
+$chamados_registrados = explode("#", $itens);
+
+if(in_array($_SESSION['id_chamado'],$chamados_registrados)){
+     
+  $titulo=$chamados_registrados[2];
+  $categoria = $chamados_registrados[3];
+  $descricao=$chamados_registrados[4];
+}
+}
+}
 
 ?>
 <html>
@@ -48,12 +70,13 @@
                   <form action="registrar_chamado.php" method="post">
                     <div class="form-group">
                       <label>Título</label>
-                      <input name="titulo" type="text" class="form-control" placeholder="Título">
+                      <input name="titulo" type="text" class="form-control" placeholder="Título" value=<?=$_SESSION['editar']== 1 ? $titulo : ' ';?>>
                     </div>
                     
                     <div class="form-group">
                       <label>Categoria</label>
-                      <select name="categoria" class="form-control">
+                      <select name="categoria" class="form-control" >     
+                      <?=$_SESSION['editar']== 1 ? "<option>".$categoria."</option>": ' ';?>         
                         <option>Criação Usuário</option>
                         <option>Impressora</option>
                         <option>Hardware</option>
@@ -64,7 +87,7 @@
                     
                     <div class="form-group">
                       <label>Descrição</label>
-                      <textarea name="descricao" class="form-control" rows="3"></textarea>
+                      <textarea name="descricao" class="form-control" rows="3" ><?=$_SESSION['editar']== 1 ? $descricao : ' '?></textarea>
                     </div>
 
                     <div class="row mt-5">

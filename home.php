@@ -1,7 +1,7 @@
 <?php
 
  require_once('usuario_autenticado.php');
-
+ $_SESSION['editar'] = false;
 ?>
 
 <html>

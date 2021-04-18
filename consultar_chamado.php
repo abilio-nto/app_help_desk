@@ -59,23 +59,29 @@
                        $dados_chamado = explode('#',$registros);
                         
                        if($_SESSION['perfil_id']==2){
-                         if($_SESSION['id'] != $dados_chamado[0]){
+                         if($_SESSION['id'] != $dados_chamado[1]){
                            continue;
                          }
                        }
                        
 
-                       if(count($dados_chamado)<3){
+                       if(count($dados_chamado)<4){
                          continue;
                        }
-                      
+                     
                   ?>  
                   <div class="card mb-3 bg-light">
                     <div class="card-body">
-                      <h5 class="card-title"><?=$dados_chamado[1]?></h5>
-                      <h6 class="card-subtitle mb-2 text-muted"><?=$dados_chamado[2]?></h6>
-                      <p class="card-text"><?=$dados_chamado[3]?></p>
+                      <h5 class="card-title"><?=$dados_chamado[2]?></h5>
+                      <h6 class="card-subtitle mb-2 text-muted"><?=$dados_chamado[3]?></h6>
+                      <p class="card-text"><?=$dados_chamado[4]?></p>
+                      <form action="editar_chamado.php" method="post">
+                      <input type="hidden" name="id_chamado" value=<?= $dados_chamado[0]?>>
+                      <button class="btn btn-primary btn-sm" >Editar</button>
+                      <button class="btn btn-danger btn-sm">Excluir</button>
+                      </form>
                     </div>
+                    
                   </div> 
                 <?php } ?>  
               
